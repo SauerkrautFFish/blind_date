@@ -56,3 +56,5 @@ echo "启动服务中..."
 # 启动Django服务
 nohup python3.10 manage.py runserver 0.0.0.0:$PORT &
 echo "启动服务成功"
+
+exit 0
