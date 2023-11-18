@@ -15,6 +15,7 @@ jobs:
         run: |
           echo "${{ secrets.SECRET_KEY }}" > ~/matchingkey.pem
           chmod 600 ~/matchingkey.pem
+          ssh -o StrictHostKeyChecking=no -i ~/matchingkey.pem root@${{ secrets.PROD_HOST }} "rm -rf ~/blind_date; mkdir -p ~/blind_date"
           # Copy files from the current branch to remote host using scp
           scp -o StrictHostKeyChecking=no -i ~/matchingkey.pem -r $GITHUB_WORKSPACE/* root@${{ secrets.PROD_HOST }}:~/blind_date
           ssh -o StrictHostKeyChecking=no -i ~/matchingkey.pem root@${{ secrets.PROD_HOST }} "~/blind_date/release.sh"
