@@ -12,7 +12,7 @@ jobs:
         run: |
           echo "${{ secrets.SECRET_KEY }}" > ~/matchingkey.pem
           chmod 600 ~/matchingkey.pem
-          ssh -t -t root@${{ secrets.PROD_HOST }} -i ~/matchingkey.pem
+          ssh -o StrictHostKeyChecking=no -t -t root@${{ secrets.PROD_HOST }} -i ~/matchingkey.pem
           ls -al
     # - uses: actions/checkout@v3
     # - uses: actions/setup-python@v3
