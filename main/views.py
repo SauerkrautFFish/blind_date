@@ -9,6 +9,10 @@ from main.utils.token import BDToken
 loger = getLogger("main")
 
 
+def login_html(req):
+    return render(req, "login.html")
+
+
 @bd_post
 def register(req):
     try:
@@ -17,9 +21,9 @@ def register(req):
         account = post_data.get("post_data", None)
         password = post_data.get("password", None)
         username = post_data.get("username", None)
-
+        print("xixi")
         # 简单校验
-        if not all[account, password, username]:
+        if not all([account, password, username]):
             return {"code": BUSINESS_EXP_CODE, "message": "账号, 密码和用户名不能为空"}
 
         # 创建用户

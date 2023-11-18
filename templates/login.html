@@ -1,0 +1,281 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>大气后台登录html页面模板 - </title>
+    <link rel="stylesheet" type="text/css" href="/static/css/login/zui.css" media="all">
+    <link rel="stylesheet" type="text/css" href="/static/css/login/login.css" media="all">
+    <!--stylesheets-->
+    <link href="/static/css/login/style.css" rel='stylesheet' type='text/css' media="all">
+    <!--//stylesheets-->
+    <link href="http://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
+    <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="/static/css/login/font-awesome.min.css" rel="stylesheet">
+    <style> body {
+        background: url(../static/images/4.jpg) no-repeat center;
+        background-size: cover;
+    }
+
+    #regi_container {
+        background: white;
+        color: #2289F0;
+        padding: 15px;
+        margin: 100px auto 0px;
+        width: 1000px;
+        height: 500px;
+        text-align: center;
+        font-family: "微软雅黑 Light";
+        box-shadow: 10px 10px 15px black;
+        visibility: hidden;
+        border-radius: 1em;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -70%);
+        z-index: 100;
+    }
+
+    hr {
+        width: 80%;
+        border: #2289F0 1px solid;
+        margin-bottom: 15px;
+    }
+
+    #regi_container input {
+        width: 360px;
+        height: 40px;
+        margin: 10px;
+        font-size: 32px;
+        font-family: "微软雅黑 Light";
+    }
+
+    #regi_container button {
+        width: 240px;
+        height: 60px;
+        background: #2289F0;
+        border: 0px;
+        color: white;
+        margin: 20px;
+        font-size: 20px;
+        font-family: "微软雅黑 Light";
+        font-weight: bold;
+    }
+
+    button:hover {
+        background: #00c8D0;
+    }
+
+    </style>
+</head>
+
+<body>
+
+
+<!-- Navigation -->
+{% csrf_token %}
+<div class="container">
+    <div class="header-bar">
+        <nav class="navbar navbar-default">
+            <div class="navbar-header navbar-left">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                        data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <h1><a class="navbar-brand" href="index.html">Blind<span>Date</span></a></h1>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse navbar-right" id="bs-example-navbar-collapse-1">
+                <nav>
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="index.html">Home</a></li>
+                        <li><a href="#about" class="scroll">About</a></li>
+                        <li><a href="#services" class="scroll">Services</a></li>
+                        <li><a href="#blog" class="scroll">Blog</a></li>
+                        <li><a href="#gallery" class="scroll">Gallery</a></li>
+                        <li><a href="#team" class="scroll">Team</a></li>
+                        <li><a href="#contact" class="scroll">Contact</a></li>
+                    </ul>
+                </nav>
+
+
+            </div>
+        </nav>
+    </div>
+
+    <div class="clearfix"></div>
+
+</div>
+
+
+<div class="container">
+
+    <!--Slider-->
+    <div class="slider">
+        <div class="callbacks_container w3l">
+            <ul class="rslides" id="slider">
+                <li>
+
+                    <div class="slider-info">
+                        <h4>Happy Couples For Ever</h4>
+                        <p>Lorem ipsum dolor sit,</p>
+
+                    </div>
+                </li>
+                <li>
+
+                    <div class="slider-info">
+                        <h4>The Best Day In Our Lives </h4>
+                        <p>Quis autem vel eum quivol.</p>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+        <div class="clearfix"></div>
+
+    </div>
+
+</div>
+
+<div class="container">
+    <div class="login-body">
+
+        <form action="javascript:;" method="post" class="login-form">
+            <h3> 相亲可视化记录 </h3>
+            <h5 style="padding-bottom: 10px"> Blind Date Visual Record </h5>
+            <!-- 账号登陆 -->
+            <div id="MobileBox" class="item-box">
+                <div class="input-group user-name"><span class="input-group-addon"><i class="icon-user"></i></span>
+                    <input type="text" name="username" class="form-control" placeholder="用户名/手机号">
+                </div>
+                <div class="input-group password"><span class="input-group-addon"><i class="icon-lock"></i></span>
+                    <input type="password" name="password" class="form-control" placeholder="密码">
+                </div>
+                <div class="gap">
+
+                    <div class="pull-right" style="margin-top: 6px"><a href="javascript:;"
+                                                                       class="link">忘记密码</a><span
+                            class="split-space">|</span><a id="register" class="link">新用户注册</a></div>
+
+                    <div class="pretty-box">
+                        <input type="checkbox" value="1" name="REMEMBER" id="remember" class="">
+                        <label for="remember" style="font-weight: normal">记住我</label>
+                    </div>
+                </div>
+
+                <div class="login_btn_panel">
+                    <button class=" btn btn-primary btn-block btn-lg" data-ajax="post" type="submit"
+                            data-callback="success">登录
+                    </button>
+                    <div class="check-tips"></div>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
+
+<div id="regi_container">
+    <br/>
+    <h1>用户注册页面</h1>
+    <hr/>
+    <!---表单-->
+    <div method="post" action="" autocomplete="on">
+        <br/>
+        <label>姓  名：
+            <input type="text" id="re_username" placeholder="请输入姓名" required/>
+            <!--placeholder=添加提示语句  required非空验证-->
+        </label><br/>
+        <label>账  号：
+            <input type="text" id="re_account" placeholder="请输入账号" required/>
+        </label><br/>
+        <label>密 码：
+            <input type="password" id="re_password" placeholder="请输入密码" required/>
+        </label><br/>
+
+        <br/>
+
+
+        <button id="submit_btn">提交注册</button>
+    </div>
+</div>
+
+
+<script type='text/javascript' src='/static/js/jquery-2.2.3.min.js'></script>
+<script src="/static/js/responsiveslides.min.js"></script>
+
+<script>
+    $(function () {
+        $("#slider").responsiveSlides({
+            auto: true,
+            pager: true,
+            nav: true,
+            speed: 1000,
+            namespace: "callbacks",
+            before: function () {
+                $('.events').append("<li>before event fired.</li>");
+            },
+            after: function () {
+                $('.events').append("<li>after event fired.</li>");
+            }
+        });
+    });
+
+
+    $(document).ready(function () {
+        $(document).click(function (e) {
+            if (document.getElementById("regi_container").style.visibility === "visible") {
+                var target = $(e.target);
+                if (!target.is('#regi_container') && !target.parents().is('#regi_container')) {
+                    document.getElementById("regi_container").style.visibility = "hidden";
+                }
+            }
+
+        });
+
+        $('#register').click(function (e) {
+            e.stopPropagation();
+            document.getElementById("regi_container").style.visibility = "visible";
+        });
+
+        $('#submit_btn').click(function (e) {
+            console.log("???");
+            e.stopPropagation();
+            console.log("hh");
+            const re_account = document.getElementById('re_account').value;
+            const re_username = document.getElementById('re_username').value;
+            const re_password = document.getElementById('re_password').value;
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+            $.ajax({
+              url: '/api/register', // 请求的URL
+              method: 'POST', // 请求方法
+              headers: {
+                'X-CSRFToken': csrfToken // 将csrftoken添加到请求头
+              },
+              dataType: 'json', // 数据类型
+              contentType: 'application/json', // 请求内容的类型
+              data: JSON.stringify({ "re_username": re_username,  "re_account": re_account, "re_password": re_password}), // 要发送的数据，转换为 JSON 字符串
+              success: function(response) {
+                // 请求成功时的处理
+                console.log(response);
+              },
+              error: function(xhr, status, error) {
+                // 处理错误
+                console.error('There was an error:', error);
+              }
+            });
+        });
+
+    });
+
+</script>
+
+</script>
+
+</body>
+
+</html>
