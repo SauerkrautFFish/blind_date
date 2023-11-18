@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # 检查当前机器是否安装了 Python
-if ! command -v python3 &>/dev/null; then
+if ! command -v python3.10 &>/dev/null; then
     echo "没有发现python, 开始下载python3.10"
 
     # 安装Python 3.10（使用yum包管理器）
@@ -15,15 +15,17 @@ if ! command -v python3 &>/dev/null; then
 
     echo "下载python3.10成功"
 
-    echo "更新pip"
-    # 更新pip到最新版本
-    python3.10 -m pip install --upgrade pip
-    echo "更新pip成功"
 fi
 
 # 进入项目目录
 cd ~/blind_date || exit 1
 echo "进入项目根目录"
+
+echo "更新pip"
+    # 更新pip到最新版本
+python3.10 -m pip install --upgrade pip
+echo "更新pip成功"
+
 echo "下载项目依赖"
 # 安装依赖包
 python3.10 -m pip install -r requirements.txt
