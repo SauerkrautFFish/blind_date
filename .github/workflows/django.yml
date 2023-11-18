@@ -10,10 +10,9 @@ jobs:
     steps:
       - name: gogogo
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SECRET_KEY }}" > ~/.ssh/id_rsa.pub
-          chmod 600 ~/.ssh/id_rsa.pub
-          ssh -t -t root@"${{ secrets.PROD_HOST }}" -i ~/.ssh/id_rsa.pub
+          echo "${{ secrets.SECRET_KEY }}" > ~/matchingkey.pem
+          chmod 600 ~/matchingkey.pem
+          ssh -t -t root@"${{ secrets.PROD_HOST }}" -i ~/matchingkey.pem
           ls -al
     # - uses: actions/checkout@v3
     # - uses: actions/setup-python@v3
