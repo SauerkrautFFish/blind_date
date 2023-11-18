@@ -1,34 +1,49 @@
 #!/bin/bash
-
+python_version=$(python3 --version 2>&1)
 # 检查当前机器是否安装了 Python
-if ! command -v python3.10 &>/dev/null; then
-    echo "没有发现python, 开始下载python3.10"
+if [[ ! "$python_version" == *"Python 3.10.6"* ]]; then
+    echo "没有发现python, 开始下载Python 3.10.6"
 
     # 安装Python 3.10（使用yum包管理器）
     sudo yum update -y
-    sudo yum install -y python3.10
-
+    sudo yum install gcc openssl-devel bzip2-devel libffi-devel zlib-devel -y
+    wget https://www.python.org/ftp/python/3.10.6/Python-3.10.6.tgz
+    tar -zxvf Python-3.10.6.tgz
+    cd Python-3.10.6 || exit 1
+    ./configure --prefix=/usr/local/python3
+    make && make install
+    rm -rf /usr/bin/python3
+    rm -rf /usr/bin/pip3
+    ln -s /usr/local/python3/bin/python3.10 /usr/bin/python3
+    ln -s /usr/local/python3/bin/pip3.10 /usr/bin/pip3
     if [ $? -ne 0 ]; then
-        echo "下载python3.10失败"
+        echo "下载Python 3.10.6失败"
         exit 1
     fi
-
+    rm -rf Python-3.10.6.tgz
     echo "下载python3.10成功"
 
+    echo "更新pip"
+    # 更新pip到最新版本
+    pip3 install --upgrade pip
+    echo "更新pip成功"
+
 fi
+
+cat <<EOF > ~/.pip/config.ini
+[global]
+index-url = http://mirrors.aliyun.com/pypi/simple/
+[install]
+trusted-host=mirrors.aliyun.com
+EOF
 
 # 进入项目目录
 cd ~/blind_date || exit 1
 echo "进入项目根目录"
 
-echo "更新pip"
-    # 更新pip到最新版本
-python3.10 -m pip install --upgrade pip
-echo "更新pip成功"
-
 echo "下载项目依赖"
 # 安装依赖包
-python3.10 -m pip install -r requirements.txt
+pip3 install -r requirements.txt
 
 if [ $? -ne 0 ]; then
     echo "下载项目依赖失败"
