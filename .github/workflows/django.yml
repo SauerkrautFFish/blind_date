@@ -8,12 +8,16 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: gogogo
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Copy code to remote
         run: |
           echo "${{ secrets.SECRET_KEY }}" > ~/matchingkey.pem
           chmod 600 ~/matchingkey.pem
-          ssh -o StrictHostKeyChecking=no -t -t root@${{ secrets.PROD_HOST }} -i ~/matchingkey.pem
-          ls -al
+          # Copy files from the current branch to remote host using scp
+          scp -o StrictHostKeyChecking=no -i ~/matchingkey.pem -r $GITHUB_WORKSPACE/* root@${{ secrets.PROD_HOST }}:~/
+          
     # - uses: actions/checkout@v3
     # - uses: actions/setup-python@v3
     #   with:
