@@ -6,4 +6,4 @@ echo "Executing release process..."
 sleep 3
 
 # Simulate a successful execution by exiting with a status code of 0
-exit 0
+exit 1
