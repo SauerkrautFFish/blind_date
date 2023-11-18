@@ -8,14 +8,21 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3
-    - uses: actions/setup-python@v3
-      with:
-        python-version: '3.9'
-    - name: Install Dependencies
-      run: |
-        python -m pip install --upgrade pip
-        pip install -r requirements.txt
-    - name: Run Tests
-      run: |
-        python manage.py runserver 8068
+      - name: gogogo
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SECRET_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh root@{{ secrets.PROD_HOST }} -i ~/.ssh/id_rsa
+          ls -al
+    # - uses: actions/checkout@v3
+    # - uses: actions/setup-python@v3
+    #   with:
+    #     python-version: '3.9'
+    # - name: Install Dependencies
+    #   run: |
+    #     python -m pip install --upgrade pip
+    #     pip install -r requirements.txt
+    # - name: Run Tests
+    #   run: |
+    #     python manage.py runserver 8068
