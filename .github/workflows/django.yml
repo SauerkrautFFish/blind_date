@@ -13,7 +13,7 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.SECRET_KEY }}" > ~/.ssh/id_rsa
           chmod 600 ~/.ssh/id_rsa
-          # ssh root@"${{ secrets.PROD_HOST }}" -i ~/.ssh/id_rsa
+          ssh root@"${{ secrets.PROD_HOST }}" -i ~/.ssh/id_rsa
           cat ~/.ssh/id_rsa
           ls -al
     # - uses: actions/checkout@v3
