@@ -60,10 +60,7 @@ if [[ ! "$python_version" == *"Python 3.10.6"* ]]; then
     rm -rf /usr/bin/python3 & rm -rf /usr/bin/pip3
     ln -s /usr/local/python3/bin/python3.10 /usr/bin/python3
     ln -s /usr/local/python3/bin/pip3.10 /usr/bin/pip3
-    if [ $? -ne 0 ]; then
-        echo "下载Python 3.10.6失败"
-        exit 1
-    fi
+    cd ~ || exit 1
     rm -rf Python-3.10.6.tgz
     echo "下载python3.10.6成功"
 
