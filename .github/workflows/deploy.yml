@@ -5,7 +5,7 @@ on:
     branches: [ "master" ]
 
 jobs:
-  git clone:
+  push-code-to-remote:
     runs-on: ubuntu-latest
     steps:
       - name: checkout source code
@@ -17,7 +17,7 @@ jobs:
           chmod 600 ~/matchingkey.pem
           ssh -o StrictHostKeyChecking=no -i ~/matchingkey.pem root@${{ secrets.PROD_HOST }} "rm -rf ~/blind_date; mkdir -p ~/blind_date"
           scp -o StrictHostKeyChecking=no -i ~/matchingkey.pem -r $GITHUB_WORKSPACE/* root@${{ secrets.PROD_HOST }}:~/blind_date
-  download dependencies:
+  download-dependencies:
     runs-on: ubuntu-latest
     steps:
       - name:   download project dependencies
