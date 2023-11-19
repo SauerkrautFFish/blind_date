@@ -21,7 +21,7 @@ jobs:
     needs: push-code-to-remote
     runs-on: ubuntu-latest
     steps:
-      - name:   download project dependencies
+      - name: download project dependencies
         run: |
           echo "${{ secrets.SECRET_KEY }}" > ~/matchingkey.pem
           chmod 600 ~/matchingkey.pem
