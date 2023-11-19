@@ -6,13 +6,9 @@ if [[ ! "$python_version" == *"Python 3.10.6"* ]]; then
     # https://www.zhihu.com/question/456908213/answer/3248085449?utm_id=0
     echo "没有发现python, 开始执行相关下载"
 
-    echo "更新yum"
-    sudo yum update -y
     echo "下载zlib zlib-dev openssl-devel..."
     sudo yum install -y zlib zlib-dev openssl-devel sqlite-devel bzip2-devel libffi libffi-devel gcc gcc-c++
 
-    echo "下载sqlite3"
-    yum install -y sqlite-devel
     cd ~
     echo "下载openssl1.1.1."
     wget https://www.openssl.org/source/openssl-1.1.1q.tar.gz
