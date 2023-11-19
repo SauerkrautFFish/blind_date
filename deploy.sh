@@ -25,7 +25,7 @@ fi
 echo "迁移命令执行成功"
 echo "启动服务中..."
 # 启动Django服务
-nohup python3 manage.py runserver 0.0.0.0:$PORT &
+nohup python3 manage.py runserver 0.0.0.0:$PORT > bd_log.log 2>&1 &
 echo "启动服务成功, 端口号:$PORT"
 
 exit 0
