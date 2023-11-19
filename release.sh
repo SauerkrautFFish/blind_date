@@ -2,18 +2,45 @@
 python_version=$(python3 --version 2>&1)
 # 检查当前机器是否安装了 Python
 if [[ ! "$python_version" == *"Python 3.10.6"* ]]; then
-    echo "没有发现python, 开始下载Python 3.10.6"
-
     # 安装Python 3.10（使用yum包管理器）
+    # https://www.zhihu.com/question/456908213/answer/3248085449?utm_id=0
+    echo "没有发现python, 开始执行相关下载"
+
+    echo "更新yum"
     sudo yum update -y
-    sudo yum install gcc openssl-devel bzip2-devel libffi-devel zlib-devel -y
+    echo "下载zlib zlib-dev openssl-devel..."
+    sudo yum install -y zlib zlib-dev openssl-devel sqlite-devel bzip2-devel libffi libffi-devel gcc gcc-c++
+
+    echo "下载sqlite3"
+    yum install -y sqlite-devel
+    cd ~
+    echo "下载openssl1.1.1."
+    wget https://www.openssl.org/source/openssl-1.1.1q.tar.gz
+    echo "解压openssl1.1.1"
+    tar xzf openssl-1.1.1q.tar.gz
+    cd openssl-1.1.1q || exit 1
+    echo "指定openssl1.1.1安装路径"
+    ./config --prefix=/usr/local/openssl
+    echo "安装openssl1.1.1"
+    make && make install
+    echo "openssl动态软链"
+    echo "/usr/local/lib64/" >> /etc/ld.so.conf
+    ldconfig
+    rm -rf /usr/bin/openssl
+    ln -s /usr/local/bin/openssl /usr/bin/openssl
+    echo "openssl安装完成"
+    cd ~
+    rm -rf openssl-1.1.1q.tar.gz
+    echo "下载python3.10.6"
     wget https://www.python.org/ftp/python/3.10.6/Python-3.10.6.tgz
+    echo "解压python3.10.6"
     tar -zxvf Python-3.10.6.tgz
     cd Python-3.10.6 || exit 1
-    ./configure --prefix=/usr/local/python3
+    echo "指定python3安装路径"
+    ./configure --prefix=/usr/local//python3 --with-openssl=/usr/local//openssl
+    echo "安装python3"
     make && make install
-    rm -rf /usr/bin/python3
-    rm -rf /usr/bin/pip3
+    rm -rf /usr/bin/python3 & rm -rf /usr/bin/pip3
     ln -s /usr/local/python3/bin/python3.10 /usr/bin/python3
     ln -s /usr/local/python3/bin/pip3.10 /usr/bin/pip3
     if [ $? -ne 0 ]; then
@@ -27,7 +54,6 @@ if [[ ! "$python_version" == *"Python 3.10.6"* ]]; then
     # 更新pip到最新版本
     pip3 install --upgrade pip
     echo "更新pip成功"
-
 fi
 
 cat <<EOF > ~/.pip/config.ini
