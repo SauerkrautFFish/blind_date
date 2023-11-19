@@ -10,7 +10,8 @@ if [[ ! "$python_version" == *"Python 3.10.6"* ]]; then
     # https://zhuanlan.zhihu.com/p/564255869
 
     echo "开始执行相关下载"
-
+    echo "下载lsof"
+    sudo yum install lsof -y
     echo "下载zlib zlib-dev openssl-devel..."
     sudo yum install -y zlib zlib-dev openssl-devel sqlite-devel bzip2-devel libffi libffi-devel gcc gcc-c++
 
