@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>大气后台登录html页面模板 - </title>
+    <link href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="/static/css/login/zui.css" media="all">
     <link rel="stylesheet" type="text/css" href="/static/css/login/login.css" media="all">
     <!--stylesheets-->
@@ -11,7 +12,8 @@
     <link href="http://fonts.googleapis.com/css?family=Great+Vibes" rel="stylesheet">
     <link href="http://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
     <link href="/static/css/login/font-awesome.min.css" rel="stylesheet">
-    <style> body {
+    <style>
+        body {
         background: url(../static/images/4.jpg) no-repeat center;
         background-size: cover;
     }
@@ -203,10 +205,9 @@
     </div>
 </div>
 
-
 <script type='text/javascript' src='/static/js/jquery-2.2.3.min.js'></script>
+<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="/static/js/responsiveslides.min.js"></script>
-
 <script>
     $(function () {
         $("#slider").responsiveSlides({
@@ -242,9 +243,7 @@
         });
 
         $('#submit_btn').click(function (e) {
-            console.log("???");
             e.stopPropagation();
-            console.log("hh");
             const re_account = document.getElementById('re_account').value;
             const re_username = document.getElementById('re_username').value;
             const re_password = document.getElementById('re_password').value;
@@ -261,7 +260,14 @@
               data: JSON.stringify({ "re_username": re_username,  "re_account": re_account, "re_password": re_password}), // 要发送的数据，转换为 JSON 字符串
               success: function(response) {
                 // 请求成功时的处理
-                console.log(response);
+                if(response.code === 0) {
+                    // success
+                } else if(response.code === 1) {
+                    // err
+                } else if(response.code === 2) {
+                    // business
+                }
+
               },
               error: function(xhr, status, error) {
                 // 处理错误

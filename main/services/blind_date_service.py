@@ -1,5 +1,7 @@
 import hashlib
 
+from django.db import IntegrityError
+
 from main.models import User, Candidate, BlindDateRecord
 
 
@@ -8,8 +10,11 @@ class BlindDateService(object):
     @staticmethod
     def register_user(account, password, username):
         h_password = hashlib.md5(password.encode()).hexdigest()
-        User.objects.create(User(account=account, password=h_password, username=username))
-        # 如果account冲突?
+        try:
+            User.objects.create(account=account, password=h_password, username=username)
+            return True
+        except IntegrityError:
+            return False
 
     @staticmethod
     def user_login(account, password):

@@ -1,3 +1,4 @@
+from logging import getLogger
 
 SUCCESS_CODE = 0
 ERR_CODE = 1

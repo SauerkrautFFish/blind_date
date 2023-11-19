@@ -1,6 +1,6 @@
 import json
 
-
+from django.http import JsonResponse
 from django.shortcuts import render
 from main.utils.token import BDToken
 
@@ -32,8 +32,8 @@ def bd_post(func):
             req.session["post_data"] = json.loads(req.body)
         except Exception as e:
             raise Exception(str(e))
-
-        return func(req)
+        resp = func(req)
+        return JsonResponse(resp)
 
     return wrapper
 
