@@ -1,5 +1,7 @@
 #!/bin/bash
 
+source ~/.bash_profile
+
 # 定义要使用的端口号
 PORT=8068
 
