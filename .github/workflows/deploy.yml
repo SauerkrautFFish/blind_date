@@ -1,0 +1,35 @@
+name: Django CI
+
+on:
+  push:
+    branches: [ "master" ]
+
+jobs:
+  git clone:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout source code
+        uses: actions/checkout@v2
+      
+      - name: copy source code to remote host
+        run: |
+          echo "${{ secrets.SECRET_KEY }}" > ~/matchingkey.pem
+          chmod 600 ~/matchingkey.pem
+          ssh -o StrictHostKeyChecking=no -i ~/matchingkey.pem root@${{ secrets.PROD_HOST }} "rm -rf ~/blind_date; mkdir -p ~/blind_date"
+          scp -o StrictHostKeyChecking=no -i ~/matchingkey.pem -r $GITHUB_WORKSPACE/* root@${{ secrets.PROD_HOST }}:~/blind_date
+  download dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - name:   download project dependencies
+        run: |
+          echo "${{ secrets.SECRET_KEY }}" > ~/matchingkey.pem
+          chmod 600 ~/matchingkey.pem
+          ssh -o StrictHostKeyChecking=no -i ~/matchingkey.pem root@${{ secrets.PROD_HOST }} "sh ~/blind_date/dependencies.sh"
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: deploy project
+        run: |
+          echo "${{ secrets.SECRET_KEY }}" > ~/matchingkey.pem
+          chmod 600 ~/matchingkey.pem
+          ssh -o StrictHostKeyChecking=no -i ~/matchingkey.pem root@${{ secrets.PROD_HOST }} "sh ~/blind_date/deploy.sh"

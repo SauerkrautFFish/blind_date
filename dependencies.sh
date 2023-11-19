@@ -1,4 +1,5 @@
 #!/bin/bash
+echo "检测依赖中..."
 python_version=$(python3 --version 2>&1)
 # 检查当前机器是否安装了 Python
 if [[ ! "$python_version" == *"Python 3.10.6"* ]]; then
@@ -8,7 +9,7 @@ if [[ ! "$python_version" == *"Python 3.10.6"* ]]; then
     # https://www.xjx100.cn/news/436747.html?action=onClick
     # https://zhuanlan.zhihu.com/p/564255869
 
-    echo "没有发现python, 开始执行相关下载"
+    echo "开始执行相关下载"
 
     echo "下载zlib zlib-dev openssl-devel..."
     sudo yum install -y zlib zlib-dev openssl-devel sqlite-devel bzip2-devel libffi libffi-devel gcc gcc-c++
@@ -79,7 +80,7 @@ index-url = http://mirrors.aliyun.com/pypi/simple/
 [install]
 trusted-host=mirrors.aliyun.com
 EOF
-
+echo "配置pip加速镜像成功"
 # 检查是否存在该行
 if ! grep -q "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/usr/local/openssl/lib" ~/.bash_profile; then
     # 如果不存在则向文件末尾追加该行
@@ -94,7 +95,7 @@ if ! grep -q "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/usr/local/sqlite3/lib" ~
 fi
 
 source ~/.bash_profile
-
+echo "执行bash_profile"
 # 进入项目目录
 cd ~/blind_date || exit 1
 echo "进入项目根目录"
@@ -108,28 +109,4 @@ if [ $? -ne 0 ]; then
     exit 1
 fi
 echo "下载项目依赖成功"
-# 定义要使用的端口号
-PORT=8068
-
-# 检查端口是否被占用
-if lsof -Pi :$PORT -sTCP:LISTEN -t >/dev/null; then
-    echo "端口 $PORT 已被占用."
-    kill -9 $(lsof -ti :$PORT)
-    echo "已杀死占用端口 $PORT 的进程."
-fi
-
-echo "执行Django迁移命令"
-# 执行Django迁移命令
-python3 manage.py migrate
-
-if [ $? -ne 0 ]; then
-    echo "迁移命令执行失败"
-    exit 1
-fi
-echo "迁移命令执行成功"
-echo "启动服务中..."
-# 启动Django服务
-nohup python3 manage.py runserver 0.0.0.0:$PORT &
-echo "启动服务成功"
-
-exit 0
+echo "success"
