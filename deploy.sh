@@ -14,7 +14,7 @@ cd ~/blind_date || exit 1
 
 echo "执行Django迁移命令"
 # 执行Django迁移命令
-sudo python3 manage.py migrate
+python3 manage.py migrate
 
 if [ $? -ne 0 ]; then
     echo "迁移命令执行失败"
