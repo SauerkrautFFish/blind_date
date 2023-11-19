@@ -30,7 +30,7 @@ if [[ ! "$python_version" == *"Python 3.10.6"* ]]; then
     ln -s /usr/local/openssl/bin/openssl /usr/bin/openssl
     cd ~ || exit 1
     rm -rf openssl-1.1.1q.tar.gz
-    export LD_LIBRARY_PATH=/usr/local/openssl/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/openssl/lib
     echo "openssl安装完成"
 
 
@@ -48,7 +48,7 @@ if [[ ! "$python_version" == *"Python 3.10.6"* ]]; then
     ln -s /usr/local/bin/sqlite3 /usr/bin/sqlite3
     cd ~ || exit 1
     rm -rf sqlite-autoconf-3390300.tar.gz
-    export LD_LIBRARY_PATH=/usr/local/sqlite3/lib:$LD_LIBRARY_PATH
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/sqlite3/lib
     echo "下载sqlite成功"
 
     echo "下载python3.10.6"
@@ -83,13 +83,13 @@ EOF
 # 检查是否存在该行
 if ! grep -q "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/usr/local/openssl/lib" ~/.bash_profile; then
     # 如果不存在则向文件末尾追加该行
-    echo 'export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/usr/local/openssl/lib' >> ~/.bash_profile
+    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/openssl/lib' >> ~/.bash_profile
     echo "导入openssl到bash_profile"
 fi
 # 检查是否存在该行
 if ! grep -q "export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/usr/local/sqlite3/lib" ~/.bash_profile; then
     # 如果不存在则向文件末尾追加该行
-    echo 'export LD_LIBRARY_PATH=\$LD_LIBRARY_PATH:/usr/local/sqlite3/lib' >> ~/.bash_profile
+    echo 'export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/sqlite3/lib' >> ~/.bash_profile
     echo "导入sqlite3到bash_profile"
 fi
 
