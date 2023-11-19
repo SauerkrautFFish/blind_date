@@ -10,6 +10,8 @@ if lsof -Pi :$PORT -sTCP:LISTEN -t >/dev/null; then
     echo "已杀死占用端口 $PORT 的进程."
 fi
 
+cd ~/blind_date || exit 1
+
 echo "执行Django迁移命令"
 # 执行Django迁移命令
 python3 manage.py migrate
